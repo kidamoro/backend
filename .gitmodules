@@ -1,0 +1,3 @@
+[submodule "src/shared/interfaces/interfaces"]
+	path = src/shared/interfaces/interfaces
+	url = https://github.com/kidamoro/interfaces.git
