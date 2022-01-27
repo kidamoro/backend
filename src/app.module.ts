@@ -1,20 +1,24 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseConfigService } from './config/MongooseConfigService';
+import { AuthModule } from './app/modules/auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
+    AuthModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username:'postgres',
+      password:'postgres',
+      database: 'food-track',
+      autoLoadEntities:true,
+      synchronize: true,
     }),
-    MongooseModule.forFeature([
-      //   // { name: Document1.name, schema: documentSchema1 },
-      //   // { name: Document2.name, schema: documentSchema2 },
-    ]),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
