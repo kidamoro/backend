@@ -1,20 +1,23 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseConfigService } from './config/MongooseConfigService';
 
 @Module({
   imports: [
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'admin',
+      password: 'my-weak-password',
+      database: 'postgres',
+      autoLoadEntities: true,
+      synchronize: true,
     }),
-    MongooseModule.forFeature([
-      //   // { name: Document1.name, schema: documentSchema1 },
-      //   // { name: Document2.name, schema: documentSchema2 },
-    ]),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -22,11 +25,10 @@ import { MongooseConfigService } from './config/MongooseConfigService';
           .valid('development', 'production', 'test')
           .default('development'),
         PORT: Joi.number().default(3000),
-        MONGODB_URI: Joi.string().uri().required(),
-      })
-    })
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
