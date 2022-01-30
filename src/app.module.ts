@@ -5,19 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'my-weak-password',
-      database: 'postgres',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    DatabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
