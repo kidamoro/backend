@@ -4,30 +4,12 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-<<<<<<< HEAD
 import { AuthModule } from './app/modules/auth/auth.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-
-@Module({
-  imports: [
-    AuthModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username:'postgres',
-      password:'postgres',
-      database: 'food-track',
-      autoLoadEntities:true,
-      synchronize: true,
-    }),
-=======
 import { DatabaseModule } from './database/database.module';
-
 @Module({
   imports: [
     DatabaseModule,
->>>>>>> dev
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
