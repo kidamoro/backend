@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+<<<<<<< HEAD
 import { AuthModule } from './app/modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -19,6 +21,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities:true,
       synchronize: true,
     }),
+=======
+import { DatabaseModule } from './database/database.module';
+
+@Module({
+  imports: [
+    DatabaseModule,
+>>>>>>> dev
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -26,11 +35,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           .valid('development', 'production', 'test')
           .default('development'),
         PORT: Joi.number().default(3000),
-        MONGODB_URI: Joi.string().uri().required(),
-      })
-    })
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
