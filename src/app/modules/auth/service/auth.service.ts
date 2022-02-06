@@ -4,7 +4,10 @@ import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
 import { UserRepository } from '../repository/users.repository';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { AccessToken, JwtPayload } from 'src/shared/interfaces/interfaces/user/auth/jwt-payload.interfaces';
+import {
+  AccessToken,
+  JwtPayload,
+} from 'src/shared/interfaces/interfaces/user/auth/jwt-payload.interfaces';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +15,7 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private jwtService: JwtService,
-  ) { }
+  ) {}
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     return this.userRepository.createUser(authCredentialsDto);
   }
