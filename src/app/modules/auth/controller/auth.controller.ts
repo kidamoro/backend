@@ -1,16 +1,10 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
 } from '@nestjs/common';
 import { AccessToken } from 'src/shared/interfaces/interfaces/user/auth/jwt-payload.interfaces';
 import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
-import { CreateAuthDto } from '../dto/create-auth.dto';
-import { UpdateAuthDto } from '../dto/update-auth.dto';
 import { AuthService } from '../service/auth.service';
 
 @Controller('auth')
