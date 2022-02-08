@@ -4,11 +4,12 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './app/modules/auth/auth.module';
 import { DatabaseModule } from './database/database.module';
-
 @Module({
   imports: [
     DatabaseModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
