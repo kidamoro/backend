@@ -6,12 +6,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './app/modules/auth/auth.module';
 import { DatabaseModule } from './database/database.module';
-import { FoodsModule } from './app/modules/foods/foods.module';
 @Module({
   imports: [
     DatabaseModule,
     AuthModule,
-    FoodsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
