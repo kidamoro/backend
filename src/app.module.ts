@@ -5,6 +5,7 @@ import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
+import { FoodsModule } from './app/modules/foods/foods.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DatabaseModule } from './database/database.module';
         PORT: Joi.number().default(3000),
       }),
     }),
+    FoodsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
